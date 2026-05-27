@@ -1,4 +1,3 @@
-// ===== ДАННЫЕ =====
 const products = [
   {
     id: 1, name: "Creality Ender-3 V3", cat: "home", catLabel: "Домашний", emoji: "🖨️",
@@ -62,12 +61,10 @@ const products = [
   },
 ];
 
-// ===== СОСТОЯНИЕ =====
 let cart = [];
 let filter = 'all';
 let sort = 'default';
 
-// ===== ЭЛЕМЕНТЫ =====
 const grid      = document.getElementById('productGrid');
 const cartBody  = document.getElementById('cartBody');
 const cartCount = document.getElementById('cartCount');
@@ -75,7 +72,6 @@ const cartTotal = document.getElementById('cartTotal');
 const toastEl   = new bootstrap.Toast(document.getElementById('toast'), { delay: 2000 });
 const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
 
-// ===== ОТРИСОВКА ТОВАРОВ =====
 function renderProducts() {
   let list = products.filter(p => filter === 'all' || p.cat === filter);
 
@@ -111,7 +107,6 @@ function renderProducts() {
   document.getElementById('emptyMsg').classList.toggle('d-none', list.length > 0);
 }
 
-// ===== КОРЗИНА =====
 function addToCart(id) {
   const p = products.find(p => p.id === id);
   const item = cart.find(i => i.id === id);
@@ -156,7 +151,6 @@ function renderCart() {
   cartTotal.textContent = 'Итого: ' + cart.reduce((s, i) => s + i.price * i.qty, 0).toLocaleString('ru-RU') + ' ₽';
 }
 
-// ===== СОБЫТИЯ =====
 document.getElementById('cartBtn').onclick = () => { renderCart(); cartModal.show(); };
 
 document.getElementById('checkoutBtn').onclick = () => {
@@ -180,5 +174,4 @@ document.querySelectorAll('.btn-filter').forEach(btn => {
 
 document.getElementById('sortSelect').onchange = e => { sort = e.target.value; renderProducts(); };
 
-// ===== СТАРТ =====
 renderProducts();
